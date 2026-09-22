@@ -22,7 +22,7 @@ import {
 /* ---------- Theme ---------- */
 
 const COLORS = {
-  background: 'rgb(196, 212, 188)',
+  background: '#ffffff',
   surface: '#FFFFFF',
   ink: '#1F2A44',
   muted: '#6B7691',
@@ -40,23 +40,25 @@ const CARD_FONT = Platform.select({ ios: 'Georgia', android: 'serif', default: '
 const STARTER_CARDS = [
   {
     id: '1',
-    question: 'What does JSX stand for?',
-    answer: 'JavaScript XML — a syntax that lets you write UI markup inside JavaScript.',
+    question: 'What is Android Studio?',
+    answer: 'A development environment for building Android applications.',
   },
   {
     id: '2',
-    question: 'Which hook adds state to a function component?',
-    answer: 'useState',
+    question: 'What is the Android SDK?',
+    answer: 'Android SDK is a collection of tools and APIs used to develop Android applications.',
   },
   {
+    
     id: '3',
-    question: 'Which component should you use for long, scrollable lists?',
-    answer: 'FlatList — it renders items lazily as they scroll into view.',
+    question: 'What is a View in Android?',
+    answer: 'A View is a UI element, such as a Button, TextView, or EditText, that displays or receives user interaction.',
   },
   {
+    
     id: '4',
-    question: 'How do you style components in React Native?',
-    answer: 'With StyleSheet.create() and the style prop. Styles are JavaScript objects, not CSS files.',
+    question: 'What is XML used for in Android development?',
+    answer: 'XML is traditionally used to define Android layouts and other application resources.',
   },
 ];
 
