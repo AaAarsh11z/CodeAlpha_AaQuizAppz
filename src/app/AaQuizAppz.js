@@ -19,24 +19,20 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-/* ---------- Theme ---------- */
-
 const COLORS = {
   background: '#ffffff',
   surface: '#FFFFFF',
   ink: '#1F2A44',
   muted: '#6B7691',
   line: '#D9DFEA',
-  question: '#2F5BEA', // blue edge = question side
-  answer: '#1E8E6E', // green edge = answer side
+  question: '#2F5BEA',
+  answer: '#1E8E6E', 
   danger: '#C43D3D',
 };
 
-// Serif on the card itself (like a printed study card), system sans everywhere else.
 const CARD_FONT = Platform.select({ ios: 'Georgia', android: 'serif', default: 'serif' });
 
-/* ---------- Starter data ---------- */
-
+//DEFAULT CARDS
 const STARTER_CARDS = [
   {
     id: '1',
@@ -64,7 +60,6 @@ const STARTER_CARDS = [
 
 const makeId = () => `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
 
-/* ---------- Reusable button ---------- */
 
 function AppButton({ title, onPress, variant = 'primary', disabled = false, style }) {
   return (
@@ -86,8 +81,6 @@ function AppButton({ title, onPress, variant = 'primary', disabled = false, styl
   );
 }
 
-/* ---------- Main screen ---------- */
-
 function FlashcardApp() {
   const insets = useSafeAreaInsets();
 
@@ -98,24 +91,22 @@ function FlashcardApp() {
 
   // Add / edit form
   const [modalVisible, setModalVisible] = useState(false);
-  const [editingId, setEditingId] = useState(null); // null means "adding a new card"
+  const [editingId, setEditingId] = useState(null); // adding a new card
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
 
-  // Flip animation: the card squeezes to zero width, swaps sides, then expands again.
+  // Flip animation
   const scaleX = useRef(new Animated.Value(1)).current;
   const isFlipping = useRef(false);
 
   const currentCard = cards[index];
   const canSave = questionText.trim().length > 0 && answerText.trim().length > 0;
 
-  /* --- Navigation --- */
-
   const goToCard = (nextIndex) => {
     scaleX.stopAnimation();
     scaleX.setValue(1);
     isFlipping.current = false;
-    setShowAnswer(false); // every card starts on its question
+    setShowAnswer(false);
     setIndex(nextIndex);
   };
 
@@ -145,7 +136,6 @@ function FlashcardApp() {
     );
   };
 
-  /* --- Add / edit / delete --- */
 
   const openAddModal = () => {
     setEditingId(null);
@@ -175,7 +165,7 @@ function FlashcardApp() {
       );
     } else {
       setCards((previous) => [...previous, { id: makeId(), question, answer }]);
-      goToCard(cards.length); // jump to the card that was just added
+      goToCard(cards.length); // jump to the card that is just added
     }
     closeModal();
   };
@@ -193,8 +183,6 @@ function FlashcardApp() {
       { text: 'Delete', style: 'destructive', onPress: deleteCurrentCard },
     ]);
   };
-
-  /* --- UI --- */
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -297,7 +285,6 @@ function FlashcardApp() {
         </View>
       )}
 
-      {/* Add / edit form */}
       <Modal visible={modalVisible} animationType="slide" transparent onRequestClose={closeModal}>
         <KeyboardAvoidingView
           style={styles.backdrop}
@@ -355,8 +342,6 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
-
-/* ---------- Styles ---------- */
 
 const buttonVariants = {
   primary: { backgroundColor: COLORS.question },
